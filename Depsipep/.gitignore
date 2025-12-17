@@ -1,0 +1,10 @@
+xfile
+*.pdf
+*~
+out/
+summary/
+
+*.dg
+*.eventTrace
+*.agr
+*-tc.agr
