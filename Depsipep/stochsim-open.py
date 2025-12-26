@@ -11,7 +11,7 @@ def iRate(v):
 	if v.graph != water:
 		return r, True
 
-	waterCnt = sim._marking[water]
+	waterCnt = sim.state(water)
 	if waterInFlow:
 		# waterinflow is on
 		if waterCnt <= waterMax:

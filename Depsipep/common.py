@@ -71,8 +71,8 @@ def reactionRates(e: DG.HyperEdge):
 def printFinalState(sim) -> None:
 	print('###### composition of mixture (final state) ######')
 	for v in sim.dg.vertices:
-		if sim._marking[v] > 0:
-			print(f'{v.graph.name:10} {sim._marking[v]:3} {v.graph.smiles}')
+		if sim.state(v) > 0:
+			print(f'{v.graph.name:10} {sim.state(v):3} {v.graph.smiles}')
 	print('##################################################')
 
 
