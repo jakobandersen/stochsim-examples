@@ -39,11 +39,11 @@ julia> include("atrazine.jl")
 #+END_SRC
 
 A window showing the time course should open after a while.
-It should like similar to ~atrazine-ODEsol.png~.
+It should like similar to ~atrazine-ODE-log.pdf~.
 Close the window and type ~exit()~ on the Julia prompt to exit Julia. 
 
 #+CAPTION: Course of ODE simulation.
-[[./atrazine-ODEsol.png]]
+[[./atrazine-ODE-log.png]]
 
 
 ** Rule-Based Stochastic Simulation (closed system)

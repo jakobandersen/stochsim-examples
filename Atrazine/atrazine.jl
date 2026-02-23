@@ -49,7 +49,7 @@ u0 = [1000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 p = [0.0005, 0.00332, 0.00265]
 
 # simulation time (start, stop)
-tspan = (0.1, 1000000.0)
+tspan = (0.1, 100000.0)
 
 # setup ODE problem
 odes = ODEProblem(rn, u0, tspan, p)
@@ -58,4 +58,9 @@ odes = ODEProblem(rn, u0, tspan, p)
 sol = solve(odes)
 
 # plot time course
-plot(sol, xscale = :log10)
+plot(sol, legend=:right)
+xlims!(0, 9000)
+savefig("atrazine-ODE-lin.pdf")
+
+plot(sol, xscale = :log10, legend=:right)
+#savefig("atrazine-ODE-log.pdf")
