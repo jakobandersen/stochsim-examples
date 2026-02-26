@@ -57,10 +57,15 @@ odes = ODEProblem(rn, u0, tspan, p)
 # solve ODES problem
 sol = solve(odes)
 
+# sort species alphabetically for legend
+sp_names = replace.(string.(species(rn)), "(t)" => "")
+sorted_idx = sortperm(sp_names)
+sp_labels = reshape(sp_names[sorted_idx], 1, :)
+
 # plot time course
-plot(sol, legend=:right)
+plot(sol.t, sol[sorted_idx, :]', labels=sp_labels, legend=:right)
 xlims!(0, 9000)
 savefig("atrazine-ODE-lin.pdf")
 
-plot(sol, xscale = :log10, legend=:right)
-#savefig("atrazine-ODE-log.pdf")
+plot(sol.t, sol[sorted_idx, :]', labels=sp_labels, xscale=:log10, legend=:right)
+savefig("atrazine-ODE-log.pdf")
