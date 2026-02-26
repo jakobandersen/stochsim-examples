@@ -8,6 +8,9 @@ with dg.build() as b:
 		>> repeat[10](inputRules)
 	)
 
-#p = DGPrinter()
-#p.graphvizPrefix = 'layout = "dot";'
-#dg.print(p)
+if False:
+	p = DGPrinter()
+	p.graphvizPrefix = 'layout = "dot";'
+	p.withGraphName = False
+	p.pushVertexColour(lambda v: ", label=left:\LARGE\\texttt{" + v.graph.name + "}")
+	dg.print(p)
