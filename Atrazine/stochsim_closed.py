@@ -44,5 +44,5 @@ p.pushOptions("legend style={at={(0.95, 0.5)}, anchor=east, draw=none}")
 trace.print(p)
 p.logTime = True
 p.popOptions()
-p.pushOptions("legend style={at={(0.5, 0.95)}, anchor=north, draw=none}")
+p.pushOptions("legend style={at={(0.05, 0.5)}, anchor=west, draw=none}")
 trace.print(p)
