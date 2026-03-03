@@ -50,11 +50,11 @@ def setCallbacks(sim):
 		print(f'Opening system')
 		global openInOutFlow
 		openInOutFlow = True
-	def onIterationEnd(sim, action, tInc):
+	def onIterationEnd(sim):
 		return True
 
 	sim.onIterationBegin = onIterationBegin
-	#sim.onExapnd = onExpand
+	#sim.onExpand = onExpand
 	#sim.onExpandAvoided = onExpandAvoided
 	sim.onDeadlock = onDeadlock
 	sim.onIterationEnd = onIterationEnd
@@ -64,6 +64,7 @@ setCallbacks(sim)
 trace = sim.simulate(keepNetworkOpen=True)
 iRateA = 0.000004
 oRateP = 0.00000001
+deadlockTime = sim.time
 trace = sim.simulate(time=4*10e8)
 
 styles = {
@@ -85,9 +86,16 @@ styles = {
 	P: "LimeGreen,solid,thick",
 }
 p = causality.EventTracePrinter()
-# p.logCount = True
-# p.logTime = True
 p.pushVertexOptions(lambda v: styles[v.graph])
-# p.pushOptions(lambda dg: "every axis plot/.append style={very thick}")
-# p.pushVertexOptions(lambda dg: "every mark/.append style={solid}")
+p.pushOptions("legend style={at={(0.95, 0.8)}, anchor=east, draw=none}")
+p.setPostContent(
+	R"\node (source)      at (axis cs:" + str(deadlockTime) + ",1100) {};\n" +
+	R"\node (destination) at (axis cs:" + str(deadlockTime) + ",990) {};\n" +
+	R"\draw[-latex',very thick,red](source)--(destination);" + "\n" +
+	R"\node (closed)   at (axis cs:0,1065) {};" + "\n" +
+	R"\node (deadlock) at (axis cs:" + str(deadlockTime) + ",1065) {};\n" +
+	R"\node (open)     at (axis cs:" + str(trace.time) + ",1065) {};\n" +
+	R"\draw[latex'-latex'] (closed) -- node[below] {closed system} (deadlock);" + "\n" +
+	R"\draw[latex'-latex'] (deadlock) -- node[below] {open system} (open);" + "\n"
+)
 trace.print(p)

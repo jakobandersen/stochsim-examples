@@ -43,13 +43,12 @@ def setCallbacks(sim):
 		print("ExpandAvoided:", sim.iteration)
 	def onDeadlock(sim):
 		print(f"Deadlock: {sim.iteration}, t={sim.time}")
-	def onIterationEnd(sim, action, tInc):
-		print("New state: {sim.iteration}, t={sim.time}, delta t={tInc")
-		print("  action={}".format(action))
+	def onIterationEnd(sim):
+		print(f"Iteration end: {sim.iteration}, t={sim.time}, event={sim.trace[-1]}")
 		return True
 
 	sim.onIterationBegin = onIterationBegin
-	#sim.onExapnd = onExpand
+	#sim.onExpand = onExpand
 	#sim.onExpandAvoided = onExpandAvoided
 	sim.onDeadlock = onDeadlock
 	#sim.onIterationEnd = onIterationEnd
